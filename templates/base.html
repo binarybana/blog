@@ -8,28 +8,71 @@
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
         />
+        <script>
+            // Flash prevention: Apply dark mode immediately before rendering
+            (function() {
+                const savedTheme = localStorage.getItem('darkMode');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+                // Apply dark mode if: explicitly saved as true, OR no saved preference but system prefers dark
+                if (savedTheme === 'true' || (savedTheme === null && prefersDark)) {
+                    document.documentElement.classList.add('dark-mode');
+                }
+            })();
+        </script>
         <style type="text/css">
             /* Content width constraint for optimal readability */
             :root {
                 --content-width: 50rem;
+
+                /* Light theme colors */
+                --bg-body: #e2e8f0;
+                --bg-content: #ffffff;
+                --bg-hero-start: #2d3748;
+                --bg-hero-end: #1a202c;
+                --text-primary: #2d3748;
+                --text-heading: #4a5568;
+                --text-light: #718096;
+                --accent-primary: #ff8c42;
+                --accent-hover: #ff6b35;
+                --bg-code: #f7fafc;
+                --bg-blockquote: #f7fafc;
+            }
+
+            /* Dark theme colors */
+            .dark-mode {
+                --bg-body: #1a202c;
+                --bg-content: #2d3748;
+                --bg-hero-start: #1a202c;
+                --bg-hero-end: #0d1117;
+                --text-primary: #e2e8f0;
+                --text-heading: #f7fafc;
+                --text-light: #cbd5e0;
+                --accent-primary: #ff8c42;
+                --accent-hover: #ff6b35;
+                --bg-code: #1a202c;
+                --bg-blockquote: #1a202c;
             }
 
             /* Cooler base colors for contrast with orange */
             html {
                 height: 100%;
+                transition: background-color 0.3s ease, color 0.3s ease;
             }
 
             body {
                 min-height: 100%;
                 display: flex;
                 flex-direction: column;
-                background-color: #e2e8f0;
+                background-color: var(--bg-body);
+                transition: background-color 0.3s ease;
             }
 
             h1 {
                 font-size: 4em;
-                color: #4a5568;
+                color: var(--text-heading);
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+                transition: color 0.3s ease;
             }
 
             .css-full-comments-content {
@@ -38,22 +81,23 @@
 
             /* Override hero to use cool dark blue-gray */
             .hero.is-dark {
-                background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%) !important;
+                background: linear-gradient(135deg, var(--bg-hero-start) 0%, var(--bg-hero-end) 100%) !important;
+                transition: background 0.3s ease;
             }
 
             /* Orange accent colors */
             a {
-                color: #ff8c42;
+                color: var(--accent-primary);
                 transition: all 0.2s ease;
             }
 
             a:hover {
-                color: #ff6b35 !important;
+                color: var(--accent-hover) !important;
                 text-decoration: underline;
             }
 
             .footer a:hover i {
-                color: #ff6b35 !important;
+                color: var(--accent-hover) !important;
                 transform: scale(1.1);
             }
 
@@ -64,34 +108,35 @@
             /* Orange date/metadata */
             .has-text-grey-light.subtitle,
             .subtitle.is-6.has-text-grey-light {
-                color: #ff8c42 !important;
+                color: var(--accent-primary) !important;
             }
 
             /* Orange border accent on titles */
             .title a {
-                border-left: 4px solid #ff6b35;
+                border-left: 4px solid var(--accent-hover);
                 padding-left: 12px;
                 display: inline-block;
             }
 
             /* Orange accent on page titles */
             .content .title {
-                color: #2d3748;
-                border-bottom: 3px solid #ff8c42;
+                color: var(--text-primary);
+                border-bottom: 3px solid var(--accent-primary);
                 padding-bottom: 8px;
                 display: inline-block;
+                transition: color 0.3s ease;
             }
 
             /* Breadcrumb active state in orange */
             .breadcrumb li.is-active a {
-                color: #ff6b35 !important;
+                color: var(--accent-hover) !important;
             }
 
             /* Orange hover for navigation arrows */
             .fas.fa-long-arrow-alt-left,
             .fas.fa-long-arrow-alt-right {
-                color: #ff8c42;
-                transition: transform 0.2s ease;
+                color: var(--accent-primary);
+                transition: transform 0.2s ease, color 0.3s ease;
             }
 
             a:hover .fas.fa-long-arrow-alt-left {
@@ -104,8 +149,9 @@
 
             /* Cool-toned content background */
             .section {
-                background-color: #ffffff;
+                background-color: var(--bg-content);
                 flex: 1;
+                transition: background-color 0.3s ease;
             }
 
             /* Constrain content width for optimal readability */
@@ -115,7 +161,148 @@
 
             /* Footer with cool gray background */
             .footer {
-                background-color: #e2e8f0 !important;
+                background-color: var(--bg-body) !important;
+                transition: background-color 0.3s ease;
+            }
+
+            /* Content text color for dark mode */
+            .content {
+                color: var(--text-primary);
+                transition: color 0.3s ease;
+            }
+
+            /* Headings in content */
+            .content h1,
+            .content h2,
+            .content h3,
+            .content h4,
+            .content h5,
+            .content h6 {
+                color: var(--text-heading);
+                transition: color 0.3s ease;
+            }
+
+            /* Override Bulma's .title class */
+            .title {
+                color: var(--text-heading) !important;
+                transition: color 0.3s ease;
+            }
+
+            .subtitle {
+                color: var(--text-primary) !important;
+                transition: color 0.3s ease;
+            }
+
+            /* Hero section always has dark background, so keep text light */
+            .hero .title {
+                color: #f7fafc !important;
+            }
+
+            .hero .subtitle {
+                color: #e2e8f0 !important;
+            }
+
+            /* Blockquotes */
+            .content blockquote {
+                background-color: var(--bg-blockquote);
+                border-left: 4px solid var(--accent-primary);
+                padding: 1rem 1.5rem;
+                margin: 1.5rem 0;
+                transition: background-color 0.3s ease;
+            }
+
+            /* Code blocks and inline code */
+            .content pre,
+            .content code {
+                background-color: var(--bg-code);
+                transition: background-color 0.3s ease;
+            }
+
+            .content pre {
+                padding: 1rem;
+                border-radius: 4px;
+                overflow-x: auto;
+            }
+
+            .content code {
+                padding: 0.2rem 0.4rem;
+                border-radius: 3px;
+                font-size: 0.9em;
+            }
+
+            .content pre code {
+                background-color: transparent;
+                padding: 0;
+            }
+
+            /* Theme toggle button styles */
+            .theme-toggle-wrapper {
+                position: absolute;
+                top: 1.5rem;
+                right: 1.5rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .theme-toggle {
+                position: relative;
+                width: 60px;
+                height: 30px;
+                background-color: rgba(255, 255, 255, 0.2);
+                border-radius: 15px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+                border: 2px solid rgba(255, 255, 255, 0.3);
+            }
+
+            .theme-toggle:hover {
+                background-color: rgba(255, 255, 255, 0.3);
+            }
+
+            .theme-toggle-checkbox {
+                display: none;
+            }
+
+            .theme-toggle-slider {
+                position: absolute;
+                top: 3px;
+                left: 3px;
+                width: 22px;
+                height: 22px;
+                background-color: white;
+                border-radius: 50%;
+                transition: transform 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 12px;
+            }
+
+            .theme-toggle-checkbox:checked + .theme-toggle .theme-toggle-slider {
+                transform: translateX(30px);
+            }
+
+            .theme-toggle-icon {
+                font-size: 16px;
+                opacity: 0.8;
+            }
+
+            /* Hide icons initially, show based on theme */
+            .sun-icon {
+                display: none;
+            }
+
+            .dark-mode .sun-icon {
+                display: inline;
+            }
+
+            .moon-icon {
+                display: inline;
+            }
+
+            .dark-mode .moon-icon {
+                display: none;
             }
 
             /* View transitions for smooth page navigation */
@@ -129,12 +316,21 @@
 
     <body>
         <section class="hero is-dark is-bold">
-            <div class="hero-body">
+            <div class="hero-body" style="position: relative;">
                 <div class="container">
                     <a href="/">
                         <h1 class="title">JASON KNIGHT</h1>
                     </a>
                     <p class="subtitle">Witty subtitle here</p>
+                </div>
+                <!-- Theme toggle button -->
+                <div class="theme-toggle-wrapper">
+                    <span class="theme-toggle-icon sun-icon">☀️</span>
+                    <input type="checkbox" id="theme-toggle-checkbox" class="theme-toggle-checkbox">
+                    <label for="theme-toggle-checkbox" class="theme-toggle">
+                        <span class="theme-toggle-slider"></span>
+                    </label>
+                    <span class="theme-toggle-icon moon-icon">🌙</span>
                 </div>
             </div>
         </section>
@@ -168,5 +364,45 @@
                 </div>
             </nav>
         </footer>
+        <script>
+            // Theme toggle handler
+            (function() {
+                const checkbox = document.getElementById('theme-toggle-checkbox');
+                const html = document.documentElement;
+
+                // Initialize checkbox state based on current theme
+                const isDarkMode = html.classList.contains('dark-mode');
+                checkbox.checked = isDarkMode;
+
+                // Handle toggle clicks
+                checkbox.addEventListener('change', function() {
+                    const shouldBeDark = this.checked;
+
+                    if (shouldBeDark) {
+                        html.classList.add('dark-mode');
+                        localStorage.setItem('darkMode', 'true');
+                    } else {
+                        html.classList.remove('dark-mode');
+                        localStorage.setItem('darkMode', 'false');
+                    }
+                });
+
+                // Listen for system theme changes (only if user hasn't manually set preference)
+                const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+                mediaQuery.addEventListener('change', function(e) {
+                    // Only auto-switch if user hasn't explicitly set a preference
+                    const savedTheme = localStorage.getItem('darkMode');
+                    if (savedTheme === null) {
+                        if (e.matches) {
+                            html.classList.add('dark-mode');
+                            checkbox.checked = true;
+                        } else {
+                            html.classList.remove('dark-mode');
+                            checkbox.checked = false;
+                        }
+                    }
+                });
+            })();
+        </script>
     </body>
 </html>

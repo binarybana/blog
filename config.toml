@@ -7,6 +7,13 @@ compile_sass = true
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = true
 
+[markdown.highlighting]
+# Syntax highlighting with dual themes for light/dark mode support
+# Full theme list: https://github.com/getzola/giallo
+enabled = true
+light_theme = "github-light"
+dark_theme = "github-dark"
+
 [extra]
 # Put all your custom variables here
 # zulma_title = "Jason Knight"
