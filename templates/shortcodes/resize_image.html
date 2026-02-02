@@ -1,4 +1,21 @@
-<a href="{{ get_url(path=path) }}">
+{# For colocated assets, strip date prefix (YYYY-MM-DD-) from slug for URL #}
+{% set parts = path | split(pat="/") %}
+{% set filename = parts | last %}
+{% set dir_parts = parts | slice(end=parts | length - 1) %}
+{% if dir_parts | length > 0 %}
+  {% set last_dir = dir_parts | last %}
+  {# Strip date prefix if present (e.g., 2020-07-05-journal -> journal) #}
+  {% if last_dir is matching("^[0-9]{4}-[0-9]{2}-[0-9]{2}-") %}
+    {% set stripped_dir = last_dir | split(pat="-") | slice(start=3) | join(sep="-") %}
+    {% set prefix_parts = dir_parts | slice(end=dir_parts | length - 1) %}
+    {% set url_path = prefix_parts | concat(with=[stripped_dir, filename]) | join(sep="/") %}
+  {% else %}
+    {% set url_path = path %}
+  {% endif %}
+{% else %}
+  {% set url_path = path %}
+{% endif %}
+<a href="{{ get_url(path=url_path) }}">
 {% set image = resize_image(path=path, width=width, height=height, op="fit_width") %}
 <img src="{{ image.url }}"/>
 </a>

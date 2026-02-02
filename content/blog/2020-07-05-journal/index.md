@@ -23,7 +23,7 @@ There are bits of physical personal projects sprinkled around (SDR for controlli
 
 I bought Lanczos's "Princples of Variational Mechanics" and enjoyed getting ~1/3 of the way through before finally admitting temporary defeat (his quick treatement and introduction of (to my mind) dense concepts makes it a diffcult single study guide to the subject). I bought the book after seeing more and more interesting ML concepts utilizing Hamiltonians, Lagrangians, etc and then after some skimming realizing that all of modern physics basically "abandoned" Newtonian physics and instead branch off of Lagrangian's variational formulations instead.
 
-{{ resize_image(path="blog/journal/physics.png", width=300, height=500, op="fit_width") }}
+{{ resize_image(path="blog/2020-07-05-journal/physics.png", width=300, height=500, op="fit_width") }}
 
 
 As a long time tool builder and tool collector, such powerful mathematical tools surely deserve a spot in my toolbox as well!
