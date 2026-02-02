@@ -1,0 +1,311 @@
+#!/usr/bin/env -S uv run --script
+#
+# /// script
+# requires-python = ">=3.12"
+# dependencies = ["pillow"]
+# ///
+
+"""
+Upload images/videos to R2 bucket and generate HTML snippets for blog posts.
+
+Usage:
+  mise upload path/to/file.jpg "Optional caption"
+  mise upload path/to/video.mp4 "Video caption"
+
+For videos, consider converting first:
+  mise convert video.mov           # Convert to AV1
+  mise upload video.mp4 "caption"  # Then upload
+
+Prerequisites:
+  - bunx wrangler login (one-time)
+  - ffmpeg/ffprobe installed (for video poster extraction)
+"""
+
+import subprocess
+import sys
+import json
+import tempfile
+from datetime import datetime
+from pathlib import Path
+import random
+import string
+
+from PIL import Image
+
+BUCKET = "binarybana-blog-static"
+BASE_URL = "https://blob.bask.day"
+
+IMAGE_EXTENSIONS = {".heic", ".heif", ".jpg", ".jpeg", ".png", ".webp", ".gif"}
+VIDEO_EXTENSIONS = {".mov", ".mp4"}
+
+
+def random_id(length=8):
+    """Generate a random alphanumeric string."""
+    chars = string.ascii_lowercase + string.digits
+    return "".join(random.choice(chars) for _ in range(length))
+
+
+def format_timestamp():
+    """Format current date/time as YYYY-MM-DD-HHMMSS."""
+    now = datetime.now()
+    return now.strftime("%Y-%m-%d-%H%M%S")
+
+
+def escape_html(s):
+    """Escape HTML special characters."""
+    return (
+        s.replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace('"', "&quot;")
+        .replace("'", "&#039;")
+    )
+
+
+def scale_dimensions(width, height, target_width):
+    """Calculate scaled dimensions maintaining aspect ratio."""
+    ratio = target_width / width
+    return target_width, round(height * ratio)
+
+
+def run_wrangler(args):
+    """Run a wrangler command via bunx."""
+    cmd = ["bunx", "wrangler"] + args
+    print(f"Running: {' '.join(cmd)}", file=sys.stderr)
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    # Always show output for debugging
+    if result.stdout.strip():
+        print(f"stdout: {result.stdout.strip()}", file=sys.stderr)
+    if result.stderr.strip():
+        print(f"stderr: {result.stderr.strip()}", file=sys.stderr)
+    print(f"exit code: {result.returncode}", file=sys.stderr)
+    if result.returncode != 0:
+        raise RuntimeError(f"Wrangler command failed (exit {result.returncode})")
+    return result
+
+
+def upload_to_r2(local_path, remote_path):
+    """Upload a file to R2 bucket."""
+    result = run_wrangler(["r2", "object", "put", f"{BUCKET}/{remote_path}", "--file", str(local_path), "--remote"])
+    print(f"Uploaded: {remote_path}", file=sys.stderr)
+
+
+def download_from_r2(remote_path, local_path):
+    """Download a file from R2 bucket. Returns False if file doesn't exist."""
+    result = subprocess.run(
+        ["bunx", "wrangler", "r2", "object", "get", f"{BUCKET}/{remote_path}", "--file", str(local_path), "--remote"],
+        capture_output=True,
+        text=True,
+    )
+    return result.returncode == 0
+
+
+def get_image_dimensions(path):
+    """Get image dimensions using Pillow."""
+    with Image.open(path) as img:
+        return img.width, img.height
+
+
+def get_video_dimensions(path):
+    """Get video dimensions using ffprobe."""
+    result = subprocess.run(
+        [
+            "ffprobe",
+            "-v", "error",
+            "-select_streams", "v:0",
+            "-show_entries", "stream=width,height",
+            "-of", "json",
+            str(path),
+        ],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        raise RuntimeError(f"ffprobe failed: {result.stderr}")
+    data = json.loads(result.stdout)
+    stream = data["streams"][0]
+    return stream["width"], stream["height"]
+
+
+def extract_poster(video_path, output_path):
+    """Extract first frame from video as poster image."""
+    result = subprocess.run(
+        [
+            "ffmpeg",
+            "-y",
+            "-i", str(video_path),
+            "-vframes", "1",
+            "-f", "image2",
+            str(output_path),
+        ],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        print(result.stderr, file=sys.stderr)
+        raise RuntimeError(f"ffmpeg poster extraction failed (exit {result.returncode})")
+
+
+def generate_image_snippets(path, caption, width, height):
+    """Generate HTML snippets for an image."""
+    thumb_w, thumb_h = scale_dimensions(width, height, 300)
+    full_w, full_h = scale_dimensions(width, height, 800)
+    escaped_caption = escape_html(caption)
+
+    thumb = f'''<a href="{BASE_URL}/cdn-cgi/image/format=auto/{path}" target="_blank">
+  <img alt="{escaped_caption}" src="{BASE_URL}/cdn-cgi/image/width=300,format=auto/{path}"
+       width="{thumb_w}" height="{thumb_h}" loading="lazy" />
+</a>'''
+
+    full = f'''<a href="{BASE_URL}/cdn-cgi/image/format=auto/{path}" target="_blank">
+  <img alt="{escaped_caption}" src="{BASE_URL}/cdn-cgi/image/width=800,format=auto/{path}"
+       width="{full_w}" height="{full_h}" loading="lazy" />
+</a>'''
+
+    return thumb, full
+
+
+def generate_video_snippet(video_path, poster_path, width, height):
+    """Generate HTML snippet for a video."""
+    scaled_w, scaled_h = scale_dimensions(width, height, 800)
+
+    return f'''<video controls width="{scaled_w}" height="{scaled_h}" preload="none" poster="{BASE_URL}/cdn-cgi/image/width=800,format=auto/{poster_path}">
+  <source src="{BASE_URL}/{video_path}" type="video/mp4">
+</video>'''
+
+
+def update_uploads_log(caption, snippet_content, is_video):
+    """Prepend entry to uploads.md in the bucket."""
+    today = datetime.now().strftime("%Y-%m-%d")
+    date_header = f"## {today}"
+
+    # Download existing uploads.md
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".md", delete=False) as tmp:
+        tmp_path = Path(tmp.name)
+
+    existing_content = ""
+    if download_from_r2("uploads.md", tmp_path):
+        existing_content = tmp_path.read_text()
+
+    # Create new entry
+    new_entry = f"### {caption}\n\n{snippet_content}\n"
+
+    # Build new content
+    if date_header in existing_content:
+        # Insert under existing date header
+        header_idx = existing_content.index(date_header)
+        after_header = header_idx + len(date_header)
+        new_content = (
+            existing_content[:after_header]
+            + "\n\n"
+            + new_entry
+            + "\n"
+            + existing_content[after_header:]
+        )
+    else:
+        # Add new date header at top
+        new_content = date_header + "\n\n" + new_entry
+        if existing_content.strip():
+            new_content += "\n" + existing_content
+
+    # Write and upload
+    tmp_path.write_text(new_content)
+    upload_to_r2(tmp_path, "uploads.md")
+    tmp_path.unlink()
+
+
+def upload_image(file_path, caption):
+    """Upload an image file."""
+    width, height = get_image_dimensions(file_path)
+
+    timestamp = format_timestamp()
+    file_id = random_id()
+    ext = file_path.suffix.lower().lstrip(".")
+    remote_path = f"uploads/{timestamp}-{file_id}.{ext}"
+
+    # Upload original
+    upload_to_r2(file_path, remote_path)
+
+    # Generate snippets
+    thumb, full = generate_image_snippets(remote_path, caption, width, height)
+
+    # Update log
+    log_content = f"thumb:\n{thumb}\n\nfull:\n{full}"
+    update_uploads_log(caption, log_content, is_video=False)
+
+    # Print snippet to stdout
+    print(f"### {caption}\n")
+    print(f"thumb:\n{thumb}\n")
+    print(f"full:\n{full}")
+
+
+def upload_video(file_path, caption):
+    """Upload a video file (extracts poster, uploads both)."""
+    timestamp = format_timestamp()
+    file_id = random_id()
+
+    # Get dimensions
+    width, height = get_video_dimensions(file_path)
+
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmpdir = Path(tmpdir)
+        poster_local = tmpdir / "poster.jpg"
+
+        # Extract poster frame
+        print("Extracting poster frame...", file=sys.stderr)
+        extract_poster(file_path, poster_local)
+
+        # Upload paths
+        ext = file_path.suffix.lower().lstrip(".")
+        video_remote = f"uploads/{timestamp}-{file_id}.{ext}"
+        poster_remote = f"uploads/{timestamp}-{file_id}-poster.jpg"
+
+        # Upload files
+        print("Uploading video...", file=sys.stderr)
+        upload_to_r2(file_path, video_remote)
+        print("Uploading poster...", file=sys.stderr)
+        upload_to_r2(poster_local, poster_remote)
+
+    # Generate snippet
+    snippet = generate_video_snippet(video_remote, poster_remote, width, height)
+
+    # Update log
+    update_uploads_log(caption, snippet, is_video=True)
+
+    # Print snippet to stdout
+    print(f"### {caption}\n")
+    print(snippet)
+
+
+def main():
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description="Upload images/videos to R2 bucket and generate HTML snippets."
+    )
+    parser.add_argument("file", help="Path to image or video file")
+    parser.add_argument("caption", nargs="*", help="Caption for the upload (default: filename)")
+
+    args = parser.parse_args()
+
+    file_path = Path(args.file).expanduser().resolve()
+    caption = " ".join(args.caption) if args.caption else file_path.stem
+
+    if not file_path.exists():
+        print(f"Error: File not found: {file_path}", file=sys.stderr)
+        sys.exit(1)
+
+    ext = file_path.suffix.lower()
+
+    if ext in IMAGE_EXTENSIONS:
+        upload_image(file_path, caption)
+    elif ext in VIDEO_EXTENSIONS:
+        upload_video(file_path, caption)
+    else:
+        print(f"Error: Unsupported file type: {ext}", file=sys.stderr)
+        print(f"Supported: {IMAGE_EXTENSIONS | VIDEO_EXTENSIONS}", file=sys.stderr)
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

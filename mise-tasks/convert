@@ -1,0 +1,140 @@
+#!/usr/bin/env -S uv run --script
+#
+# /// script
+# requires-python = ">=3.12"
+# dependencies = []
+# ///
+
+"""
+Convert videos to MP4/AV1 format for blog uploads.
+
+Usage:
+  mise convert video.mov                    # Output: video.mp4
+  mise convert video.mov -o output.mp4      # Specify output path
+  mise convert --crf 25 video.mov           # Higher quality
+
+Options:
+  --crf N    Video quality (AV1 CRF scale, default: 30)
+             - 23-27: Higher quality, larger files
+             - 30: Medium quality (default)
+             - 35-40: Lower quality, smaller files
+  -o PATH    Output file path (default: input with .mp4 extension)
+
+Notes:
+  - Images are not converted (use upload directly)
+  - Already-converted AV1 MP4s are skipped
+  - Uses libaom-av1 encoder with multithreading
+"""
+
+import argparse
+import json
+import subprocess
+import sys
+import os
+from pathlib import Path
+
+VIDEO_EXTENSIONS = {".mov", ".mp4", ".avi", ".mkv", ".webm"}
+
+
+def get_video_codec(path):
+    """Get video codec using ffprobe."""
+    result = subprocess.run(
+        [
+            "ffprobe",
+            "-v", "error",
+            "-select_streams", "v:0",
+            "-show_entries", "stream=codec_name",
+            "-of", "json",
+            str(path),
+        ],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        return None
+    data = json.loads(result.stdout)
+    if data.get("streams"):
+        return data["streams"][0].get("codec_name")
+    return None
+
+
+def transcode_video(input_path, output_path, crf=30):
+    """Transcode video to MP4/AV1."""
+    threads = min(os.cpu_count() or 4, 16)  # libaom recommends max 16
+
+    print(f"Transcoding to AV1 (CRF {crf}, {threads} threads)...", file=sys.stderr)
+
+    # Don't capture output - let ffmpeg progress show in terminal
+    result = subprocess.run(
+        [
+            "ffmpeg",
+            "-y",
+            "-i", str(input_path),
+            "-c:v", "libaom-av1",
+            "-crf", str(crf),
+            "-cpu-used", "4",        # Faster preset (0-8, higher=faster)
+            "-row-mt", "1",          # Row-based multithreading
+            "-tiles", "2x2",         # Tile-based parallelism
+            "-threads", str(threads),
+            "-c:a", "aac",
+            str(output_path),
+        ],
+    )
+    if result.returncode != 0:
+        raise RuntimeError(f"ffmpeg transcode failed (exit {result.returncode})")
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Convert videos to MP4/AV1 format."
+    )
+    parser.add_argument("file", help="Path to video file")
+    parser.add_argument("-o", "--output", help="Output file path (default: input with .mp4 extension)")
+    parser.add_argument("--crf", type=int, default=30,
+                        help="Video quality (23-27: high, 30: medium, 35-40: low)")
+
+    args = parser.parse_args()
+
+    input_path = Path(args.file).expanduser().resolve()
+
+    if not input_path.exists():
+        print(f"Error: File not found: {input_path}", file=sys.stderr)
+        sys.exit(1)
+
+    ext = input_path.suffix.lower()
+
+    if ext not in VIDEO_EXTENSIONS:
+        print(f"Not a video file, no conversion needed: {ext}", file=sys.stderr)
+        print(f"Supported: {VIDEO_EXTENSIONS}", file=sys.stderr)
+        sys.exit(0)
+
+    # Check if already AV1
+    codec = get_video_codec(input_path)
+    if codec == "av1" and ext == ".mp4":
+        print(f"Already AV1 MP4, no conversion needed: {input_path}", file=sys.stderr)
+        sys.exit(0)
+
+    # Determine output path
+    if args.output:
+        output_path = Path(args.output).expanduser().resolve()
+    else:
+        output_path = input_path.with_suffix(".mp4")
+        # Avoid overwriting input if it's already .mp4
+        if output_path == input_path:
+            output_path = input_path.with_stem(input_path.stem + "-av1")
+
+    print(f"Input:  {input_path}", file=sys.stderr)
+    print(f"Output: {output_path}", file=sys.stderr)
+    print(f"Codec:  {codec} -> av1", file=sys.stderr)
+
+    transcode_video(input_path, output_path, crf=args.crf)
+
+    # Show file sizes
+    input_size = input_path.stat().st_size / (1024 * 1024)
+    output_size = output_path.stat().st_size / (1024 * 1024)
+    print(f"\nDone: {input_size:.1f} MB -> {output_size:.1f} MB ({output_size/input_size*100:.0f}%)", file=sys.stderr)
+    print(output_path)
+
+
+if __name__ == "__main__":
+    main()
