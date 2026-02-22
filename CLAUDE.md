@@ -41,7 +41,7 @@ mise concat [output-file]
 Useful for creating a single file with all blog content (strips HTML, excludes drafts).
 
 ### Deployment
-GitHub Actions CI builds and deploys on push to the main branch (`zola`). Just commit and push - no manual build needed.
+GitHub Actions CI builds and deploys on push to the main branch (`main`). Just commit and push - no manual build needed.
 
 ## Site Architecture
 

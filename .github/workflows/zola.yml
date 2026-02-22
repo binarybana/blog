@@ -2,7 +2,7 @@ name: Zola to Cloudflare Workers
 
 on:
   push:
-    branches: [zola]
+    branches: [main]
 
 jobs:
   build-and-deploy:
