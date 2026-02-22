@@ -174,6 +174,6 @@ See `comment-worker/README.md` for full setup instructions.
 
 - Blog posts must follow naming convention: `YYYY-MM-DD-title-slug.md`
 - Published posts have `draft = false` in frontmatter
-- Main branch is `zola` (not `main`)
+- Main branch is `main` (previously was `zola`)
 - Image uploads via worker are stored at `https://blob.bask.day/uploads/...`
 - The `concat` task is useful for creating AI-friendly dumps of all blog content
