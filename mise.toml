@@ -1,2 +1,5 @@
 [tools]
 zola = "latest"
+
+[env]
+_.path = [".mise/bin"]

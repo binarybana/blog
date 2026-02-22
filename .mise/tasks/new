@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+#MISE description="Create a new blog post"
+#USAGE flag "-d --dir <directory>" help="Directory to create the post in" default="content/blog"
+#USAGE arg "[title]..." help="Title of the new post"
+
+import re
+from argparse import ArgumentParser
+from datetime import datetime
+from pathlib import Path
+
+POST_SOURCE = """\
++++
+title = "{title}"
+draft = true
+date = {date}
+description = ""
+tags = [ "thoughts"]
+
++++
+
+Text
+"""
+
+def slugify(text):
+    text = text.lower()
+    text = re.sub(r'[\s_]+', '-', text)
+    text = re.sub(r'[^\w\-]', '', text)
+    text = re.sub(r'\-+', '-', text)
+    return text.strip('-')
+
+parser = ArgumentParser(description="Create a new blog post")
+parser.add_argument('-d', '--dir', default='content/blog', help='Directory to create the post in')
+parser.add_argument('title', nargs='*', help='Title of the new post')
+args = parser.parse_args()
+
+title = ' '.join(args.title) if args.title else "New Post"
+date = datetime.now().strftime("%Y-%m-%d")
+
+result = POST_SOURCE.format(title=title, date=date)
+
+slug = slugify(title)
+new_filename = Path(args.dir) / f"{date}-{slug}.md"
+new_filename.parent.mkdir(parents=True, exist_ok=True)
+
+with open(new_filename, 'w') as fd:
+    fd.write(result)
+
+print(f"Created new blog post: {new_filename}")
