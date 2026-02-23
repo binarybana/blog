@@ -1,0 +1,17 @@
+name = "blog-comments"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "blog-comments"
+database_id = "96c95c30-2c34-4266-97bc-d30d479d3458"
+
+[vars]
+SITE_URL = "https://bask.day"
+
+# Custom domain `comments.bask.day` is configured via the Cloudflare dashboard.
+
+# Secrets (set via `wrangler secret put`):
+# GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET
+# GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET

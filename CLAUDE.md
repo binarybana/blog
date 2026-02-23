@@ -4,11 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a personal blog/website built with [Zola](https://www.getzola.org/), a static site generator written in Rust. The site is deployed to GitHub Pages and uses Cloudflare Workers for image/video upload functionality.
+This is a personal blog/website built with [Zola](https://www.getzola.org/), a static site generator written in Rust. The site is deployed to GitHub Pages and uses Cloudflare Workers for image/video upload functionality and comments.
 
-The repository consists of two main components:
+The repository consists of three main components:
 1. **Main site** - Zola-based static blog built from markdown content
 2. **Upload worker** - Cloudflare Worker for uploading images/videos from iOS with HTML snippet generation
+3. **Comment worker** - Cloudflare Worker providing a comment system with GitHub/Google OAuth
 
 ## Build & Development
 
@@ -118,6 +119,48 @@ npx wrangler secret put AUTH_TOKEN
 - `wrangler.toml` - Cloudflare Worker config
   - Bucket binding: `BUCKET` → `binarybana-blog-static`
   - Base URL: `https://blob.bask.day`
+
+## Comment Worker (Cloudflare)
+
+Located in `comment-worker/`, deployed to `comments.bask.day` as a Cloudflare Custom Domain.
+
+**Purpose:** Serverless comment system for blog posts — GitHub and Google OAuth login, comment storage in Cloudflare D1 (SQLite).
+
+### Worker Commands
+
+```bash
+cd comment-worker
+
+# Deploy
+npx wrangler deploy
+
+# Tail live logs
+npx wrangler tail
+
+# Run locally (local D1)
+npx wrangler dev
+
+# Apply schema changes
+npx wrangler d1 execute blog-comments --file=schema.sql --remote
+
+# Inspect DB
+npx wrangler d1 execute blog-comments --command "SELECT * FROM comments LIMIT 10" --remote
+```
+
+### Worker Features
+- GitHub and Google OAuth2 login
+- Comments stored in Cloudflare D1 (`blog-comments` database)
+- HttpOnly session cookies on `bask.day` (SameSite=Lax, 400-day expiry)
+- Vanilla JS frontend in `static/comments.js`, defer-loaded only on blog post pages
+- No npm runtime dependencies — Web APIs only
+
+### Worker Configuration
+- `wrangler.toml` - D1 binding (`DB` → `blog-comments`), `SITE_URL = "https://bask.day"`
+- Custom Domain `comments.bask.day` configured via Cloudflare dashboard
+- Secrets: `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`
+- OAuth callback URLs: `https://comments.bask.day/auth/github/callback` and `https://comments.bask.day/auth/google/callback`
+
+See `comment-worker/README.md` for full setup instructions.
 
 ## Development Workflow
 
