@@ -7,6 +7,10 @@ tags = [ "thoughts"]
 
 +++
 
+{{ dual_view(left="My Notes", right="Expanded Prose") }}
+
+{% dv() %}
+
 Funny story:
 * Not enough hotel rooms for us each to have our own, so I was bunking up with Doug who had arrived in Punta Arenas a few days ago.
 * Coming into the hotel, it was around midnight, and I texted/tried calling Doug to remind him that I was bunking with him, no answer...
@@ -22,3 +26,12 @@ Funny story:
 * We'll figure it out in the morning, then later that 
 
 Waking in Punta Arenas felt like a new world, but a lot of that was the adrenaline fueling me to go downstairs and meet 
+
+  <!-- split -->
+Waking in Punta Arenas felt like a new world, but a lot of that was the adrenaline fueling me to go downstairs and meet 
+
+
+  {% end %}
+
+{{ dual_view_end() }}
+

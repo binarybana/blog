@@ -1,0 +1,5 @@
+{% set parts = body | split(pat="<!-- split -->") %}
+<div class="dv-pair">
+  <div class="dv-left">{{ parts | first | markdown | safe }}</div>
+  <div class="dv-right">{% if parts | length > 1 %}{{ parts | last | markdown | safe }}{% endif %}</div>
+</div>

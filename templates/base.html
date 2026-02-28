@@ -311,6 +311,44 @@
                     navigation: auto;
                 }
             }
+
+            /* ================================================================
+               Dual-view layout — only activates inside .dual-view-container
+               ================================================================ */
+            .dual-view-container {
+                margin: 2rem 0;
+                font-size: 0.9rem;
+            }
+            .dv-toggle {
+                display: flex;
+                gap: 0.5rem;
+                margin-bottom: 0.75rem;
+            }
+            .dv-toggle-btn {
+                padding: 0.3rem 0.85rem;
+                background: transparent;
+                border: 1px solid var(--text-light);
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 0.8rem;
+                color: var(--text-light);
+                transition: background 0.15s, color 0.15s, border-color 0.15s;
+            }
+            .dv-toggle-btn.active {
+                background: var(--accent-primary);
+                color: white;
+                border-color: var(--accent-primary);
+            }
+            .dv-left,
+            .dv-right { display: none; }
+            .dual-view-container[data-view="left"] .dv-left { display: block; }
+            .dual-view-container[data-view="right"] .dv-right { display: block; }
+
+            /* Tighten content margins inside panels */
+            .dv-left > *:first-child,
+            .dv-right > *:first-child { margin-top: 0; }
+            .dv-left > *:last-child,
+            .dv-right > *:last-child { margin-bottom: 0; }
         </style>
     </head>
 
@@ -403,6 +441,55 @@
                     }
                 });
             })();
+        </script>
+        <script>
+            // Dual-view: wrap .dv-pair elements between markers into a toggled container
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('.dual-view-start').forEach(function(start) {
+                    var leftLabel = start.dataset.left || 'Left';
+                    var rightLabel = start.dataset.right || 'Right';
+
+                    // Find matching end marker
+                    var end = null;
+                    var cur = start.nextElementSibling;
+                    while (cur) {
+                        if (cur.classList.contains('dual-view-end')) { end = cur; break; }
+                        cur = cur.nextElementSibling;
+                    }
+
+                    // Build container
+                    var container = document.createElement('div');
+                    container.className = 'dual-view-container';
+                    container.dataset.view = 'left';
+
+                    // Toggle buttons
+                    var toggle = document.createElement('div');
+                    toggle.className = 'dv-toggle';
+                    toggle.innerHTML =
+                        '<button class="dv-toggle-btn active" data-view="left">' + leftLabel + '</button>' +
+                        '<button class="dv-toggle-btn" data-view="right">' + rightLabel + '</button>';
+                    toggle.addEventListener('click', function(e) {
+                        var btn = e.target.closest('.dv-toggle-btn');
+                        if (!btn) return;
+                        container.dataset.view = btn.dataset.view;
+                        toggle.querySelectorAll('.dv-toggle-btn').forEach(function(b) {
+                            b.classList.toggle('active', b.dataset.view === btn.dataset.view);
+                        });
+                    });
+                    container.appendChild(toggle);
+
+                    // Move .dv-pair elements into container
+                    cur = start.nextElementSibling;
+                    while (cur && !cur.classList.contains('dual-view-end')) {
+                        var next = cur.nextElementSibling;
+                        if (cur.classList.contains('dv-pair')) container.appendChild(cur);
+                        cur = next;
+                    }
+
+                    start.replaceWith(container);
+                    if (end) end.remove();
+                });
+            });
         </script>
     </body>
 </html>
