@@ -3,3 +3,22 @@ zola = "latest"
 
 [env]
 _.path = [".mise/bin"]
+
+[tasks.convert-video]
+description = "Convert iPhone MOV to AV1 MP4 for web (usage: mise run convert-video input.MOV [output.mp4])"
+run = "bash ./scripts/convert-video.sh {{args}}"
+
+[tasks.upload-video]
+description = "Upload converted MP4 to Cloudflare R2 and update uploads.md (usage: mise run upload-video input.mp4 [caption])"
+run = "bash ./scripts/upload-video.sh {{args}}"
+
+[tasks.convert-and-upload]
+description = "Convert iPhone MOV to AV1 MP4 then upload to R2 (usage: mise run convert-and-upload input.MOV [caption])"
+run = """
+set -e
+INPUT="{{arg(name='input')}}"
+CAPTION="{{arg(name='caption', default='')}}"
+OUTPUT="${INPUT%.*}.mp4"
+bash ./scripts/convert-video.sh "$INPUT" "$OUTPUT"
+bash ./scripts/upload-video.sh "$OUTPUT" "$CAPTION"
+"""
