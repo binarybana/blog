@@ -1,6 +1,6 @@
 +++
 title = "Days 1-2: Santiago and Getting to Punta Arenas"
-draft = true
+draft = false
 date = 2026-02-26
 description = ""
 tags = [ "thoughts"]
@@ -9,14 +9,13 @@ tags = [ "thoughts"]
 
 Where to start, 
 
-Flights to Santiago:
-* Sadness finally hit hard
-* What am I doing?
-* $40 fajitas
-* Managed to sleep okay. Thanks to Anthropic engineer's blog for the cervical pillow suggestion
+Flights to Houston and then Santiago:
+* Sadness finally hit hard at leaving my family behind: "What am I doing?" kind of thing.
+* I was excited for some Texas fajitas, so I splurged for some $40 fajitas at the airport... they were okay.
+* Managed to sleep okay on the red-eye to Santiago. Thanks to Anthropic engineer's blog for the cervical pillow suggestion
 
 Santiago:
-* Two things at the same time: meeting Mike, and seeing this new country/culture/city.
+* Two fascinating/new things at the same time: meeting Mike, and seeing this new country/culture/city.
 * Our tourguide Julio
   * Works for a company helping tourists find golfing destinations... in other countries?
   * "What do you want your kids to grow up to be?" (for his 6 and 8 year old): "not engineers". Since engineering is so prestigious, it has become diluted by people who "pay" for a degree more or less. And aren't truly engineers.
@@ -29,6 +28,41 @@ Santiago:
   * Sad stories of the history, the native people. So oppressed by the Spanish, then meddled with by Nixon who backed the evil president who took power by a coup (against the socialist president who committed suicide because of the fear of coup... which doesn't make too much sense)
   * Funny story about the Apache Native American statue (they didn't know that it wasn't an authentic depiction of the original Chilean population)
   * Male Female roles were pretty strong in the society, though not in your face.
+
+Mike and I on top of one of the hills in Santiago. This hill had a placard "signed" by Darwin since he spent a good bit of time here on his way to the Galapagos (I want to say a year maybe?):
+
+<a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-110721-4kd7mn4g.jpg" target="_blank">
+  <img alt="Santiago 2" src="https://blob.bask.day/cdn-cgi/image/width=300,format=auto/uploads/2026-03-03-110721-4kd7mn4g.jpg"
+       width="300" height="225" loading="lazy" />
+</a>
+
+Art in the town square. Represents the Spanish conquerors (the body) being separated from the native Mupocho (?) people's who they eventually integrated with (the head). This artwork has been heavily criticized by the natives because the nose is very European apparently, even though it's supposed to represent the native people.
+
+<a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-111354-jue30sbk.jpg" target="_blank">
+  <img alt="S2 " src="https://blob.bask.day/cdn-cgi/image/width=300,format=auto/uploads/2026-03-03-111354-jue30sbk.jpg"
+       width="300" height="225" loading="lazy" />
+</a>
+
+I snapped this because we were in a catholic church, while they were having mass, and I like how they are cool with someone parking their bike in the church, right next to the pews:
+
+<a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-111125-stc24m8r.jpg" target="_blank">
+  <img alt="A" src="https://blob.bask.day/cdn-cgi/image/width=300,format=auto/uploads/2026-03-03-111125-stc24m8r.jpg"
+       width="300" height="225" loading="lazy" />
+</a>
+
+Santiago's main courtrooms:
+
+<a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-111048-2mozh61n.jpg" target="_blank">
+  <img alt="S" src="https://blob.bask.day/cdn-cgi/image/width=300,format=auto/uploads/2026-03-03-111048-2mozh61n.jpg"
+       width="300" height="225" loading="lazy" />
+</a>
+
+A view of Santiago from the Immaculate conception statue (like the one at the top of the hill in Rio de Janiero). The haziness is from the city being in a valley and it being relatively hot today for the area (a nice mid 80's Fahrenheit):
+
+<a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-111705-l3xw8lhn.jpg" target="_blank">
+  <img alt=" Iew" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-03-111705-l3xw8lhn.jpg"
+       width="800" height="600" loading="lazy" />
+</a>
 
 * Then met up with Niki, Jason, Cath, Steve, and Toughy in the airport. Pretty surreal to hear Youtube audio coming out of people's faces. :D
 
