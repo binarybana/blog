@@ -1,7 +1,7 @@
 +++
 title = "Books flying south"
 draft = true
-date = 2026-02-22
+date = 2026-03-01
 description = ""
 tags = [ "thoughts"]
 
