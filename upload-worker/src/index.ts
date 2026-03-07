@@ -1,4 +1,3 @@
-import { transcodeVideo } from './video';
 
 interface Env {
   BUCKET: R2Bucket;
@@ -238,20 +237,6 @@ function generateImageSnippets(
   return { thumb: thumbHtml, full: fullHtml };
 }
 
-// Generate HTML snippet for a video
-function generateVideoSnippet(
-  videoPath: string,
-  posterPath: string,
-  dimensions: ImageDimensions,
-  baseUrl: string
-): string {
-  const scaled = scaleDimensions(dimensions, 800);
-
-  return `<video controls width="${scaled.width}" height="${scaled.height}" preload="none" poster="${baseUrl}/cdn-cgi/image/width=800,format=auto/${posterPath}">
-  <source src="${baseUrl}/${videoPath}" type="video/mp4">
-</video>`;
-}
-
 // Escape HTML special characters
 function escapeHtml(str: string): string {
   return str
@@ -285,7 +270,7 @@ async function prependToLog(
     newEntry = `### ${caption}\n\n${snippets}\n`;
   } else {
     const imgSnippets = snippets as { thumb: string; full: string };
-    newEntry = `### ${caption}\n\nthumb:\n${imgSnippets.thumb}\n\nfull:\n${imgSnippets.full}\n`;
+    newEntry = `### ${caption}\n\n${imgSnippets.full}\n`;
   }
 
   const dateHeader = `## ${today}`;
@@ -622,81 +607,29 @@ export default {
         });
 
       } else if (mediaInfo.type === 'video') {
-        // Transcode video using ffmpeg.wasm
         const data = await file.arrayBuffer();
-        const videoData = new Uint8Array(data);
+        const filename = `uploads/${timestamp}-${id}.${mediaInfo.extension}`;
 
-        try {
-          // Transcode MOV -> MP4 (AV1)
-          const result = await transcodeVideo(videoData, `${timestamp}-${id}`);
+        await env.BUCKET.put(filename, data, {
+          httpMetadata: { contentType: file.type }
+        });
 
-          // Store transcoded video
-          const videoFilename = `uploads/${timestamp}-${id}.mp4`;
-          await env.BUCKET.put(videoFilename, result.mp4Data, {
-            httpMetadata: { contentType: 'video/mp4' }
-          });
-
-          // Store poster frame
-          const posterFilename = `uploads/${timestamp}-${id}-poster.jpg`;
-          await env.BUCKET.put(posterFilename, result.posterData, {
-            httpMetadata: { contentType: 'image/jpeg' }
-          });
-
-          const dimensions = { width: result.width, height: result.height };
-
-          // Generate snippet with poster
-          const snippet = generateVideoSnippet(
-            videoFilename,
-            posterFilename,
-            dimensions,
-            env.BASE_URL
-          );
-
-          // Prepend to log
-          await prependToLog(env.BUCKET, caption, snippet, true);
-
-          return new Response(JSON.stringify({
-            success: true,
-            type: 'video',
-            path: videoFilename,
-            posterPath: posterFilename,
-            dimensions,
-            snippet
-          }), {
-            headers: { 'Content-Type': 'application/json' }
-          });
-
-        } catch (error) {
-          // If transcoding fails, fall back to storing original
-          console.error('Video transcoding failed:', error);
-
-          const filename = `uploads/${timestamp}-${id}.${mediaInfo.extension}`;
-          await env.BUCKET.put(filename, data, {
-            httpMetadata: { contentType: file.type }
-          });
-
-          const dimensions = { width: 1920, height: 1080 };
-          const snippet = `<video controls width="800" height="450" preload="none">
-  <source src="${env.BASE_URL}/${filename}" type="video/quicktime">
+        const dimensions = { width: 1920, height: 1080 };
+        const snippet = `<video controls width="800" height="450" preload="none">
+  <source src="${env.BASE_URL}/${filename}" type="${file.type}">
 </video>`;
 
-          await prependToLog(env.BUCKET, caption, snippet, true);
+        await prependToLog(env.BUCKET, caption, snippet, true);
 
-          const errorMsg = error instanceof Error ? error.message : 'Unknown error';
-          const errorStack = error instanceof Error ? error.stack : '';
-          console.log('Transcode error details:', { errorMsg, errorStack });
-
-          return new Response(JSON.stringify({
-            success: true,
-            type: 'video',
-            path: filename,
-            warning: `Video transcoding not available in Workers. Stored as ${mediaInfo.extension}. MOV files may not play in all browsers. Consider using Cloudflare Stream for video hosting.`,
-            error: errorMsg,
-            snippet
-          }), {
-            headers: { 'Content-Type': 'application/json' }
-          });
-        }
+        return new Response(JSON.stringify({
+          success: true,
+          type: 'video',
+          path: filename,
+          dimensions,
+          snippet
+        }), {
+          headers: { 'Content-Type': 'application/json' }
+        });
       }
 
       return new Response('Unknown error', { status: 500 });
