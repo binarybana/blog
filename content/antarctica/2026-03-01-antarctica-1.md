@@ -51,8 +51,9 @@ I couldn't help but be strongly reminded of the famous intro sequence of the gam
 
  The funny part here being that Mike earlier in his career co-founded the company that made Half-Life. It was just one surreal moment in what would be a continual stream of them for many days to come.
 
-<video controls width="800" height="450" preload="none" poster="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-07-222036-b18b2512-poster.jpg">
-  <source src="https://blob.bask.day/uploads/2026-03-07-222036-b18b2512.mp4" type="video/mp4">
+<video controls width="800" height="450" preload="none" poster="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/e18fcb77e454e3ab-poster.jpg">
+  <source src="https://blob.bask.day/uploads/e18fcb77e454e3ab.mp4" type='video/mp4; codecs="av01.0.04M.08"'>
+  <source src="https://blob.bask.day/uploads/e18fcb77e454e3ab-h264.mp4" type="video/mp4">
 </video>
 
 ### Counter-rotating helicopter
@@ -80,8 +81,9 @@ The other folks around the beach are there to board two other Russian-run boats 
 
 But we'll see more of them in this blog in upcoming posts.
 
-<video controls width="800" height="450" preload="none" poster="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-07-220135-f8e41ac7-poster.jpg">
-  <source src="https://blob.bask.day/uploads/2026-03-07-220135-f8e41ac7.mp4" type="video/mp4">
+<video controls width="800" height="450" preload="none" poster="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/6fbed20e379767c2-poster.jpg">
+  <source src="https://blob.bask.day/uploads/6fbed20e379767c2.mp4" type='video/mp4; codecs="av01.0.04M.08"'>
+  <source src="https://blob.bask.day/uploads/6fbed20e379767c2-h264.mp4" type="video/mp4">
 </video>
 
 ### On the beach 1
@@ -99,13 +101,15 @@ But we'll see more of them in this blog in upcoming posts.
 ### Boat tour part 1
 Getting on Icebird, we got our assigned bunks and our safety briefing. Here's a brief two part video tour of the boat and some of the characters involved. The one person I forgot to point out in the galley was Alex, AKA "Chef" as he preferred to be called. He was also (surprise!) our chef for the duration of the trip. He's made us a great number of delicious dishes. Some of my favorite are the traditional Russian borscht (a stew) and central asian plov (amazing lamb and rice dish).
 
-<video controls width="800" height="450" preload="none" poster="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-06-213227-ad854731-poster.jpg">
-  <source src="https://blob.bask.day/uploads/2026-03-06-213227-ad854731.mp4" type="video/mp4">
+<video controls width="800" height="450" preload="none" poster="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/f54bab8373e217cf-poster.jpg">
+  <source src="https://blob.bask.day/uploads/f54bab8373e217cf.mp4" type='video/mp4; codecs="av01.0.04M.08"'>
+  <source src="https://blob.bask.day/uploads/f54bab8373e217cf-h264.mp4" type="video/mp4">
 </video>
 
 ### Boat tour part 2
-<video controls width="800" height="450" preload="none" poster="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-07-111633-81aaae7e-poster.jpg">
-  <source src="https://blob.bask.day/uploads/2026-03-07-111633-81aaae7e.mp4" type="video/mp4">
+<video controls width="800" height="450" preload="none" poster="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/0c4607d5d95bd520-poster.jpg">
+  <source src="https://blob.bask.day/uploads/0c4607d5d95bd520.mp4" type='video/mp4; codecs="av01.0.04M.08"'>
+  <source src="https://blob.bask.day/uploads/0c4607d5d95bd520-h264.mp4" type="video/mp4">
 </video>
 
 Then we setoff for our first anchorage: Deception Island.
