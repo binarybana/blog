@@ -10,22 +10,12 @@ interface ImageDimensions {
   height: number;
 }
 
-// Generate a random string for filenames
-function randomId(length = 8): string {
-  const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-  let result = '';
-  for (let i = 0; i < length; i++) {
-    result += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return result;
-}
-
-// Format current date/time as YYYY-MM-DD-HHMMSS
-function formatTimestamp(): string {
-  const now = new Date();
-  const date = now.toISOString().split('T')[0];
-  const time = now.toISOString().split('T')[1].replace(/:/g, '').split('.')[0];
-  return `${date}-${time}`;
+// Derive a stable hex ID from file content (first 16 chars of SHA-256)
+async function contentHash(data: ArrayBuffer): Promise<string> {
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(hashBuffer))
+    .map(b => b.toString(16).padStart(2, '0')).join('')
+    .slice(0, 16);
 }
 
 // Extract dimensions from image data
@@ -569,10 +559,6 @@ export default {
         return new Response(`Unsupported file type: ${file.type}`, { status: 400 });
       }
 
-      // Generate filename
-      const timestamp = formatTimestamp();
-      const id = randomId();
-
       if (mediaInfo.type === 'image') {
         // Handle image upload
         const data = await file.arrayBuffer();
@@ -582,12 +568,15 @@ export default {
           return new Response('Could not extract image dimensions', { status: 400 });
         }
 
-        const filename = `uploads/${timestamp}-${id}.${mediaInfo.extension}`;
+        const hash = await contentHash(data);
+        const filename = `uploads/${hash}.${mediaInfo.extension}`;
 
-        // Store in R2
-        await env.BUCKET.put(filename, data, {
-          httpMetadata: { contentType: file.type }
-        });
+        // Store in R2 (skip if already exists)
+        if (!await env.BUCKET.head(filename)) {
+          await env.BUCKET.put(filename, data, {
+            httpMetadata: { contentType: file.type }
+          });
+        }
 
         // Generate snippets
         const snippets = generateImageSnippets(filename, caption, dimensions, env.BASE_URL);
@@ -608,11 +597,15 @@ export default {
 
       } else if (mediaInfo.type === 'video') {
         const data = await file.arrayBuffer();
-        const filename = `uploads/${timestamp}-${id}.${mediaInfo.extension}`;
+        const hash = await contentHash(data);
+        const filename = `uploads/${hash}.${mediaInfo.extension}`;
 
-        await env.BUCKET.put(filename, data, {
-          httpMetadata: { contentType: file.type }
-        });
+        // Store in R2 (skip if already exists)
+        if (!await env.BUCKET.head(filename)) {
+          await env.BUCKET.put(filename, data, {
+            httpMetadata: { contentType: file.type }
+          });
+        }
 
         const dimensions = { width: 1920, height: 1080 };
         const snippet = `<video controls width="800" height="450" preload="none">
