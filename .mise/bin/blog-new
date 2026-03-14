@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 set -e
 file=$(mise run new "$@" | sed 's/Created new blog post: //')
+# TODO: Fixme, file is the path from the root of the project, but if I'm calling
+# this from inside a subdirectory, then the path will be incorrect.
 "${EDITOR:-vi}" "$file"
 echo "$file"

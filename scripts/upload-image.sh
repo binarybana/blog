@@ -99,9 +99,8 @@ printf '### %s\n\n%s\n' "$CAPTION" "$FULL_HTML" > "$ENTRY_FILE"
 
 # Fetch existing uploads.md
 echo "Fetching uploads.md from R2..."
-FETCH_TMP="$TMPDIR_WORK/fetch.md"
-if wrangler r2 object get "${BUCKET}/uploads.md" --pipe --remote > "$FETCH_TMP" 2>/dev/null; then
-  mv "$FETCH_TMP" "$UPLOADS_CURRENT"
+if wrangler r2 object get "${BUCKET}/uploads.md" --file="$UPLOADS_CURRENT" --remote > /dev/null 2>&1; then
+  : # file saved directly to $UPLOADS_CURRENT
 else
   touch "$UPLOADS_CURRENT"
 fi
