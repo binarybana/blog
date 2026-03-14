@@ -68,35 +68,40 @@ echo "Dimensions: ${WIDTH}x${HEIGHT} -> ${SCALED_WIDTH}x${SCALED_HEIGHT}"
 
 # Extract poster frame from AV1 file
 echo "Extracting poster frame..."
-ffmpeg -y -nostdin -i "$AV1_FILE" -vframes 1 -q:v 2 -f image2 "$POSTER_FILE" 2>/dev/null
+ffmpeg -y -nostdin -i "$AV1_FILE" -vframes 1 \
+  -vf "colormatrix=bt2020:bt709,format=yuv420p,unsharp=5:5:0.8:3:3:0.0" \
+  -q:v 2 -f image2 "$POSTER_FILE"
 
 # Upload AV1 MP4 (skip if already exists in R2)
-echo "Checking AV1 video in R2..."
+echo "Checking AV1 video: ${VIDEO_KEY}"
 if wrangler r2 object head "${BUCKET}/${VIDEO_KEY}" --remote 2>/dev/null; then
-  echo "AV1 video already exists in R2, skipping upload."
+  echo "  -> already exists, skipping."
 else
-  echo "Uploading AV1 video to R2..."
-  wrangler r2 object put "${BUCKET}/${VIDEO_KEY}" --file="$AV1_FILE" --content-type="video/mp4" --remote
+  echo "  -> not found, uploading ${AV1_FILE}..."
+  wrangler r2 object put "${BUCKET}/${VIDEO_KEY}" --file="$AV1_FILE" --content-type="video/mp4" --remote > /dev/null 2>&1
+  echo "  -> done."
 fi
 
 # Upload H.264 companion if present (skip if already exists in R2)
 if [ "$HAS_H264" = true ]; then
-  echo "Checking H.264 video in R2..."
+  echo "Checking H.264 video: ${H264_KEY}"
   if wrangler r2 object head "${BUCKET}/${H264_KEY}" --remote 2>/dev/null; then
-    echo "H.264 video already exists in R2, skipping upload."
+    echo "  -> already exists, skipping."
   else
-    echo "Uploading H.264 video to R2..."
-    wrangler r2 object put "${BUCKET}/${H264_KEY}" --file="$H264_FILE" --content-type="video/mp4" --remote
+    echo "  -> not found, uploading ${H264_FILE}..."
+    wrangler r2 object put "${BUCKET}/${H264_KEY}" --file="$H264_FILE" --content-type="video/mp4" --remote > /dev/null 2>&1
+    echo "  -> done."
   fi
 fi
 
 # Upload poster (skip if already exists in R2)
-echo "Checking poster in R2..."
+echo "Checking poster: ${POSTER_KEY}"
 if wrangler r2 object head "${BUCKET}/${POSTER_KEY}" --remote 2>/dev/null; then
-  echo "Poster already exists in R2, skipping upload."
+  echo "  -> already exists, skipping."
 else
-  echo "Uploading poster to R2..."
-  wrangler r2 object put "${BUCKET}/${POSTER_KEY}" --file="$POSTER_FILE" --content-type="image/jpeg" --remote
+  echo "  -> not found, uploading..."
+  wrangler r2 object put "${BUCKET}/${POSTER_KEY}" --file="$POSTER_FILE" --content-type="image/jpeg" --remote > /dev/null 2>&1
+  echo "  -> done."
 fi
 
 # Build the HTML snippet
@@ -156,7 +161,7 @@ python3 "$UPDATE_SCRIPT" "$UPLOADS_CURRENT" "$ENTRY_FILE" "$UPLOADS_NEW" "## ${T
 
 # Upload updated uploads.md
 echo "Updating uploads.md in R2..."
-wrangler r2 object put "${BUCKET}/uploads.md" --file="$UPLOADS_NEW" --content-type="text/markdown" --remote
+wrangler r2 object put "${BUCKET}/uploads.md" --file="$UPLOADS_NEW" --content-type="text/markdown" --remote > /dev/null 2>&1
 
 echo ""
 echo "Upload complete!"
@@ -166,5 +171,5 @@ if [ "$HAS_H264" = true ]; then
 fi
 echo "  Poster: ${BASE_URL}/${POSTER_KEY}"
 echo ""
-echo "HTML snippet:"
-echo "$SNIPPET"
+echo "uploads.md snippet:"
+printf '### %s\n\n%s\n' "$CAPTION" "$SNIPPET"

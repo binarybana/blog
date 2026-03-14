@@ -12,6 +12,14 @@ run = "bash ./scripts/convert-video.sh {{args}}"
 description = "Upload AV1 + H.264 MP4s to Cloudflare R2 and update uploads.md (usage: mise run upload-video input.mp4 [caption])"
 run = "bash ./scripts/upload-video.sh {{args}}"
 
+[tasks.list-r2]
+description = "List objects in R2 bucket with optional prefix (usage: mise run list-r2 [prefix])"
+run = "bash ./scripts/list-r2.sh {{args}}"
+
+[tasks.upload-image]
+description = "Upload an image (HEIC/JPG/PNG/WebP/GIF) to Cloudflare R2 and update uploads.md (usage: mise run upload-image input.heic [caption])"
+run = "bash ./scripts/upload-image.sh {{args}}"
+
 [tasks.convert-and-upload]
 description = "Convert iPhone MOV to AV1 + H.264 MP4s then upload to R2 (usage: mise run convert-and-upload input.MOV [caption])"
 run = """

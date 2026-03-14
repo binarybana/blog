@@ -13,7 +13,7 @@ else
   ffmpeg -y -nostdin -i "$INPUT" \
     -map 0:v:0 \
     -map 0:a:0 \
-    -c:v libsvtav1 -crf 30 -preset 4 \
+    -c:v libsvtav1 -crf 36 -preset 4 \
     -svtav1-params "color-primaries=9:transfer-characteristics=18:matrix-coefficients=9" \
     -c:a copy \
     -movflags +faststart \
@@ -26,7 +26,7 @@ else
   ffmpeg -y -nostdin -i "$INPUT" \
     -map 0:v:0 \
     -map 0:a:0 \
-    -c:v libx264 -crf 23 -preset slow -profile:v high -pix_fmt yuv420p \
+    -c:v libx264 -crf 25 -preset slow -profile:v high -pix_fmt yuv420p \
     -c:a copy \
     -movflags +faststart \
     "$OUTPUT_H264"
