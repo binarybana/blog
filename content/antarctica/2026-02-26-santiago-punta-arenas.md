@@ -32,35 +32,35 @@ Santiago:
 Mike and I on top of one of the hills in Santiago. This hill had a placard "signed" by Darwin since he spent a good bit of time here on his way to the Galapagos (I want to say a year maybe?):
 
 <a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-110721-4kd7mn4g.jpg" target="_blank">
-  <img alt="Santiago 2" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-03-110721-4kd7mn4g.jpg"
+  <img alt="Santiago 2" src="https://blob.bask.day/cdn-cgi/image/dpr=2,width=800,format=auto/uploads/2026-03-03-110721-4kd7mn4g.jpg"
        width="800" height="600" loading="lazy" />
 </a>
 
 Art in the town square. Represents the Spanish conquerors (the body) being separated from the native Mupocho (?) people's who they eventually integrated with (the head). This artwork has been heavily criticized by the natives because the nose is very European apparently, even though it's supposed to represent the native people.
 
 <a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-111354-jue30sbk.jpg" target="_blank">
-  <img alt="S2 " src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-03-111354-jue30sbk.jpg"
+  <img alt="S2 " src="https://blob.bask.day/cdn-cgi/image/dpr=2,width=800,format=auto/uploads/2026-03-03-111354-jue30sbk.jpg"
        width="800" height="600" loading="lazy" />
 </a>
 
 I snapped this because we were in a catholic church, while they were having mass, and I like how they are cool with someone parking their bike in the church, right next to the pews:
 
 <a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-111125-stc24m8r.jpg" target="_blank">
-  <img alt="A" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-03-111125-stc24m8r.jpg"
+  <img alt="A" src="https://blob.bask.day/cdn-cgi/image/dpr=2,width=800,format=auto/uploads/2026-03-03-111125-stc24m8r.jpg"
        width="800" height="600" loading="lazy" />
 </a>
 
 Santiago's main courtrooms:
 
 <a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-111048-2mozh61n.jpg" target="_blank">
-  <img alt="S" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-03-111048-2mozh61n.jpg"
+  <img alt="S" src="https://blob.bask.day/cdn-cgi/image/dpr=2,width=800,format=auto/uploads/2026-03-03-111048-2mozh61n.jpg"
        width="800" height="600" loading="lazy" />
 </a>
 
 A view of Santiago from the Immaculate conception statue (like the one at the top of the hill in Rio de Janiero). The haziness is from the city being in a valley and it being relatively hot today for the area (a nice mid 80's Fahrenheit):
 
 <a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-111705-l3xw8lhn.jpg" target="_blank">
-  <img alt=" Iew" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-03-111705-l3xw8lhn.jpg"
+  <img alt=" Iew" src="https://blob.bask.day/cdn-cgi/image/dpr=2,width=800,format=auto/uploads/2026-03-03-111705-l3xw8lhn.jpg"
        width="800" height="600" loading="lazy" />
 </a>
 
