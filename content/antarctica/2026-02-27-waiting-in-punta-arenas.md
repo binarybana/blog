@@ -77,8 +77,8 @@ This is the town square in Punta Arenas. It has a statue of Magellan and you're 
 ### Pa beach
 A view of the coastline and one of the biggest buildings in the town.
 
-<a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-113449-b8avhwxc.jpg" target="_blank">
-  <img alt="Pa beach" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-03-113449-b8avhwxc.jpg"
+dpr=2,<a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-113449-b8avhwxc.jpg" target="_blank">
+  <img alt="Pa beach" src="https://blob.bask.day/cdn-cgi/image/dpr=2,width=800,format=auto/uploads/2026-03-03-113449-b8avhwxc.jpg"
        width="800" height="600" loading="lazy" />
 </a>
 
@@ -88,7 +88,7 @@ A view of the coastline and one of the biggest buildings in the town.
 <uninformed opinion alert> The Latino culture puts a lot of importance on death and the afterlife, so their cemetary was next level. Street names in the cemetary, topiary, you name it.
 
 <a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-113523-7pu5xfbe.jpg" target="_blank">
-  <img alt="Cemetary in pa " src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-03-113523-7pu5xfbe.jpg"
+  <img alt="Cemetary in pa " src="https://blob.bask.day/cdn-cgi/image/dpr=2,width=800,format=auto/uploads/2026-03-03-113523-7pu5xfbe.jpg"
        width="800" height="600" loading="lazy" />
 </a>
 
@@ -98,7 +98,7 @@ A view of the coastline and one of the biggest buildings in the town.
 And they did fancy crypts (tombs?) as well.
 
 <a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-113544-dl0yjv2h.jpg" target="_blank">
-  <img alt="Fancy" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-03-113544-dl0yjv2h.jpg"
+  <img alt="Fancy" src="https://blob.bask.day/cdn-cgi/image/dpr=2,width=800,format=auto/uploads/2026-03-03-113544-dl0yjv2h.jpg"
        width="800" height="600" loading="lazy" />
 </a>
 
@@ -108,7 +108,7 @@ And they did fancy crypts (tombs?) as well.
 And they had options for the Japanese economy style sleepers as well.
 
 <a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-113618-q9tnxv9h.jpg" target="_blank">
-  <img alt="Not so fancy" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-03-113618-q9tnxv9h.jpg"
+  <img alt="Not so fancy" src="https://blob.bask.day/cdn-cgi/image/dpr=2,width=800,format=auto/uploads/2026-03-03-113618-q9tnxv9h.jpg"
        width="800" height="600" loading="lazy" />
 </a>
 
@@ -119,7 +119,7 @@ We went to a naval museum which had recreations of the boat Magellan circumnavig
 
 
 <a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-113641-hdrnosna.jpg" target="_blank">
-  <img alt="Selfie on Magellan" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-03-113641-hdrnosna.jpg"
+  <img alt="Selfie on Magellan" src="https://blob.bask.day/cdn-cgi/image/dpr=2,width=800,format=auto/uploads/2026-03-03-113641-hdrnosna.jpg"
        width="800" height="600" loading="lazy" />
 </a>
 
@@ -131,7 +131,7 @@ They also had a replica of Darwin's the HMS Beagle. Darwin had a much better tim
 What a flex.
 
 <a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-113658-0yv0rfdd.jpg" target="_blank">
-  <img alt="Beagle" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-03-113658-0yv0rfdd.jpg"
+  <img alt="Beagle" src="https://blob.bask.day/cdn-cgi/image/dpr=2,width=800,format=auto/uploads/2026-03-03-113658-0yv0rfdd.jpg"
        width="800" height="600" loading="lazy" />
 </a>
 
@@ -145,7 +145,7 @@ Back in 2016, the British government decided to drum up public interest in their
 Boaty McBoatface was the winner! But sadly, the British government got cold feet and named the boat the "David Attenborough" instead. But in our hearts, this ship has one and only one true name.
 
 <a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-113723-3zlk8pmf.jpg" target="_blank">
-  <img alt="Boaty!!" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-03-113723-3zlk8pmf.jpg"
+  <img alt="Boaty!!" src="https://blob.bask.day/cdn-cgi/image/dpr=2,width=800,format=auto/uploads/2026-03-03-113723-3zlk8pmf.jpg"
        width="800" height="600" loading="lazy" />
 </a>
 
@@ -159,7 +159,7 @@ At about this point in the hike, I saw some of the interesting foliage and made 
 Little did I know, that this would be a prescient game, since I was about to take on the role of "native plant taster." Though this will be more apparent in the Wynn's video when they upload it later (starting in April I think).
 
 <a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-113814-k88xn3bg.jpg" target="_blank">
-  <img alt="Trees" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-03-113814-k88xn3bg.jpg"
+  <img alt="Trees" src="https://blob.bask.day/cdn-cgi/image/dpr=2,width=800,format=auto/uploads/2026-03-03-113814-k88xn3bg.jpg"
        width="800" height="450" loading="lazy" />
 </a>
 
@@ -169,7 +169,7 @@ Little did I know, that this would be a prescient game, since I was about to tak
 Nuff said.
 
 <a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-113833-4rmehsl2.jpg" target="_blank">
-  <img alt="Flower" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-03-113833-4rmehsl2.jpg"
+  <img alt="Flower" src="https://blob.bask.day/cdn-cgi/image/dpr=2,width=800,format=auto/uploads/2026-03-03-113833-4rmehsl2.jpg"
        width="800" height="600" loading="lazy" />
 </a>
 
@@ -179,7 +179,7 @@ Nuff said.
 Tougy modeling for my shot here.
 
 <a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-113856-vxs4a2k4.jpg" target="_blank">
-  <img alt="Tougy" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-03-113856-vxs4a2k4.jpg"
+  <img alt="Tougy" src="https://blob.bask.day/cdn-cgi/image/dpr=2,width=800,format=auto/uploads/2026-03-03-113856-vxs4a2k4.jpg"
        width="800" height="600" loading="lazy" />
 </a>
 
@@ -191,7 +191,7 @@ The name of the [berries](https://es.wikipedia.org/wiki/Gaultheria_mucronata) th
 They look quite a bit like blueberries. They varied from sweet to mildly bitter.
 
 <a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-113927-2is1u725.jpg" target="_blank">
-  <img alt="Berries!" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-03-113927-2is1u725.jpg"
+  <img alt="Berries!" src="https://blob.bask.day/cdn-cgi/image/dpr=2,width=800,format=auto/uploads/2026-03-03-113927-2is1u725.jpg"
        width="800" height="600" loading="lazy" />
 </a>
 
@@ -203,7 +203,7 @@ Not sure what kinds of birds these are (forgive me Uncle Mark). But they we chow
 This was on the way to a national park, which I amazingly navigated us to using Google Maps (and got us to a locked gate after an hour drive)...
 
 <a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-113948-8zezbeaj.jpg" target="_blank">
-  <img alt="Birds" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-03-113948-8zezbeaj.jpg"
+  <img alt="Birds" src="https://blob.bask.day/cdn-cgi/image/dpr=2,width=800,format=auto/uploads/2026-03-03-113948-8zezbeaj.jpg"
        width="800" height="600" loading="lazy" />
 </a>
 
@@ -213,7 +213,7 @@ This was on the way to a national park, which I amazingly navigated us to using 
 After jumping over the locked fence, we encountered a beautiful little bridge and stream. Someone was camping here, but they weren't home.
 
 <a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-114014-ioiuwz23.jpg" target="_blank">
-  <img alt="Hike1" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-03-114014-ioiuwz23.jpg"
+  <img alt="Hike1" src="https://blob.bask.day/cdn-cgi/image/dpr=2,width=800,format=auto/uploads/2026-03-03-114014-ioiuwz23.jpg"
        width="800" height="600" loading="lazy" />
 </a>
 
@@ -223,7 +223,7 @@ After jumping over the locked fence, we encountered a beautiful little bridge an
 
 
 <a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-114029-nlpd2fen.jpg" target="_blank">
-  <img alt="Hike2" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-03-114029-nlpd2fen.jpg"
+  <img alt="Hike2" src="https://blob.bask.day/cdn-cgi/image/dpr=2,width=800,format=auto/uploads/2026-03-03-114029-nlpd2fen.jpg"
        width="800" height="450" loading="lazy" />
 </a>
 
@@ -235,7 +235,7 @@ Cath made us some yummy chicken, avocado, salsa sandwiches. With some Chilean ro
 The yellow pack there is my day pack (Emily's duffel sack). While massively oversized, it's great to store a bunch of puffy jackets and very lightweight. Been working great.
 
 <a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-114054-58bpf10g.jpg" target="_blank">
-  <img alt="Lunch" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-03-114054-58bpf10g.jpg"
+  <img alt="Lunch" src="https://blob.bask.day/cdn-cgi/image/dpr=2,width=800,format=auto/uploads/2026-03-03-114054-58bpf10g.jpg"
        width="800" height="450" loading="lazy" />
 </a>
 
@@ -246,7 +246,7 @@ We stuck to this road most of the way in (trying to get to the national park). T
 
 
 <a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-114118-eqbmmcpj.jpg" target="_blank">
-  <img alt="Road" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-03-114118-eqbmmcpj.jpg"
+  <img alt="Road" src="https://blob.bask.day/cdn-cgi/image/dpr=2,width=800,format=auto/uploads/2026-03-03-114118-eqbmmcpj.jpg"
        width="800" height="600" loading="lazy" />
 </a>
 
@@ -262,7 +262,7 @@ It may not look like much here, but each of these mounds was a giant boulder of 
 Apparently this is normal for bogs, but I was high on life at the time, and the experience was really eye-opening. I got a little excited and I think that will come across better in the Wynn's video of me hamming it up a bit.
 
 <a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-114144-ftq81nhg.jpg" target="_blank">
-  <img alt="Big" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-03-114144-ftq81nhg.jpg"
+  <img alt="Big" src="https://blob.bask.day/cdn-cgi/image/dpr=2,width=800,format=auto/uploads/2026-03-03-114144-ftq81nhg.jpg"
        width="800" height="450" loading="lazy" />
 </a>
 
@@ -276,7 +276,7 @@ The consistency of this stuff is like pudding with some curds mixed in.
 When you dig up a little on your finger it smells **Exactly** like the black water sewage tank smell of an RV park. Fascinating how nothing but plant matter can produce such similar smells to a very different input.
 
 <a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-114214-7dy99g95.jpg" target="_blank">
-  <img alt="Bog2 " src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-03-114214-7dy99g95.jpg"
+  <img alt="Bog2 " src="https://blob.bask.day/cdn-cgi/image/dpr=2,width=800,format=auto/uploads/2026-03-03-114214-7dy99g95.jpg"
        width="800" height="600" loading="lazy" />
 </a>
 
@@ -292,7 +292,7 @@ This is one of the other kinds of berries we ran into. These were especially odd
 We learned later that the native Mapucho people used to eat these just as a textural filler (maybe some carbs?) despite the non-flavor. Their diet had so much meat/protein that this was a welcome snack.
 
 <a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-114236-1ivg5f31.jpg" target="_blank">
-  <img alt="Berries" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-03-114236-1ivg5f31.jpg"
+  <img alt="Berries" src="https://blob.bask.day/cdn-cgi/image/dpr=2,width=800,format=auto/uploads/2026-03-03-114236-1ivg5f31.jpg"
        width="800" height="600" loading="lazy" />
 </a>
 
@@ -304,7 +304,7 @@ And one shot of us at the house chatting on the couches, sharing things, talking
 Seeing this I wish I had gotten some more pictures of the house, but it always feels weird to stick cameras in people's faces. Luckily, everyone signing up for this particular trip knew they were going to be on camera so it doesn't feel too awkward.
 
 <a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/2026-03-03-114259-2u27ovfl.jpg" target="_blank">
-  <img alt="Imghouse time" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto/uploads/2026-03-03-114259-2u27ovfl.jpg"
+  <img alt="Imghouse time" src="https://blob.bask.day/cdn-cgi/image/dpr=2,width=800,format=auto/uploads/2026-03-03-114259-2u27ovfl.jpg"
        width="800" height="600" loading="lazy" />
 </a>
 
