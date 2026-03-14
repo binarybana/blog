@@ -215,12 +215,12 @@ function generateImageSnippets(
   const fullWidth = scaleDimensions(dimensions, 800);
 
   const thumbHtml = `<a href="${baseUrl}/cdn-cgi/image/format=auto/${path}" target="_blank">
-  <img alt="${escapeHtml(caption)}" src="${baseUrl}/cdn-cgi/image/width=300,format=auto/${path}"
+  <img alt="${escapeHtml(caption)}" src="${baseUrl}/cdn-cgi/image/width=300,format=auto,dpr=2/${path}"
        width="${thumb.width}" height="${thumb.height}" loading="lazy" />
 </a>`;
 
   const fullHtml = `<a href="${baseUrl}/cdn-cgi/image/format=auto/${path}" target="_blank">
-  <img alt="${escapeHtml(caption)}" src="${baseUrl}/cdn-cgi/image/width=800,format=auto/${path}"
+  <img alt="${escapeHtml(caption)}" src="${baseUrl}/cdn-cgi/image/width=800,format=auto,dpr=2/${path}"
        width="${fullWidth.width}" height="${fullWidth.height}" loading="lazy" />
 </a>`;
 
