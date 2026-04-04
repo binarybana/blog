@@ -40,7 +40,11 @@ fi
 TODAY=$(date -u '+%Y-%m-%d')
 
 # Derive stable keys from file content hashes (matching upload worker scheme)
-AV1_HASH=$(shasum -a 256 "$AV1_FILE" | cut -c1-16)
+if command -v sha256sum &>/dev/null; then
+  AV1_HASH=$(sha256sum "$AV1_FILE" | cut -c1-16)
+else
+  AV1_HASH=$(shasum -a 256 "$AV1_FILE" | cut -c1-16)
+fi
 VIDEO_KEY="uploads/${AV1_HASH}.mp4"
 H264_KEY="uploads/${AV1_HASH}-h264.mp4"
 POSTER_KEY="uploads/${AV1_HASH}-poster.jpg"
@@ -66,43 +70,34 @@ SCALED_WIDTH=800
 
 echo "Dimensions: ${WIDTH}x${HEIGHT} -> ${SCALED_WIDTH}x${SCALED_HEIGHT}"
 
-# Extract poster frame from AV1 file
+# Extract poster frame — prefer H.264 (already BT.709 SDR) over AV1 (needs colormatrix)
 echo "Extracting poster frame..."
-ffmpeg -y -nostdin -i "$AV1_FILE" -vframes 1 \
-  -vf "colormatrix=bt2020:bt709,format=yuv420p,unsharp=5:5:0.8:3:3:0.0" \
-  -q:v 2 -f image2 "$POSTER_FILE"
-
-# Upload AV1 MP4 (skip if already exists in R2)
-echo "Checking AV1 video: ${VIDEO_KEY}"
-if wrangler r2 object head "${BUCKET}/${VIDEO_KEY}" --remote 2>/dev/null; then
-  echo "  -> already exists, skipping."
-else
-  echo "  -> not found, uploading ${AV1_FILE}..."
-  wrangler r2 object put "${BUCKET}/${VIDEO_KEY}" --file="$AV1_FILE" --content-type="video/mp4" --remote > /dev/null 2>&1
-  echo "  -> done."
-fi
-
-# Upload H.264 companion if present (skip if already exists in R2)
 if [ "$HAS_H264" = true ]; then
-  echo "Checking H.264 video: ${H264_KEY}"
-  if wrangler r2 object head "${BUCKET}/${H264_KEY}" --remote 2>/dev/null; then
-    echo "  -> already exists, skipping."
-  else
-    echo "  -> not found, uploading ${H264_FILE}..."
-    wrangler r2 object put "${BUCKET}/${H264_KEY}" --file="$H264_FILE" --content-type="video/mp4" --remote > /dev/null 2>&1
-    echo "  -> done."
-  fi
+  ffmpeg -y -nostdin -i "$H264_FILE" -vframes 1 \
+    -vf "format=yuv420p,unsharp=5:5:0.8:3:3:0.0" \
+    -q:v 2 -f image2 "$POSTER_FILE"
+else
+  ffmpeg -y -nostdin -i "$AV1_FILE" -vframes 1 \
+    -vf "colormatrix=bt2020:bt709,format=yuv420p,unsharp=5:5:0.8:3:3:0.0" \
+    -q:v 2 -f image2 "$POSTER_FILE"
 fi
 
-# Upload poster (skip if already exists in R2)
-echo "Checking poster: ${POSTER_KEY}"
-if wrangler r2 object head "${BUCKET}/${POSTER_KEY}" --remote 2>/dev/null; then
-  echo "  -> already exists, skipping."
-else
-  echo "  -> not found, uploading..."
-  wrangler r2 object put "${BUCKET}/${POSTER_KEY}" --file="$POSTER_FILE" --content-type="image/jpeg" --remote > /dev/null 2>&1
+# Upload AV1 MP4
+echo "Uploading AV1 video: ${VIDEO_KEY}"
+wrangler r2 object put "${BUCKET}/${VIDEO_KEY}" --file="$AV1_FILE" --content-type="video/mp4" --remote
+echo "  -> done."
+
+# Upload H.264 companion if present
+if [ "$HAS_H264" = true ]; then
+  echo "Uploading H.264 video: ${H264_KEY}"
+  wrangler r2 object put "${BUCKET}/${H264_KEY}" --file="$H264_FILE" --content-type="video/mp4" --remote
   echo "  -> done."
 fi
+
+# Upload poster
+echo "Uploading poster: ${POSTER_KEY}"
+wrangler r2 object put "${BUCKET}/${POSTER_KEY}" --file="$POSTER_FILE" --content-type="image/jpeg" --remote
+echo "  -> done."
 
 # Build the HTML snippet
 POSTER_URL="${BASE_URL}/cdn-cgi/image/width=800,format=auto/${POSTER_KEY}"
