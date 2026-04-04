@@ -1,10 +1,11 @@
 +++
-title = "musings"
+title = "Reflection"
 draft = true
-date = 2026-03-17
+date = 2026-04-11
 description = ""
 tags = [ "thoughts"]
 
 +++
 
-Text
+So. Quite the trip.
+

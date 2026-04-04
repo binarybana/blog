@@ -178,8 +178,12 @@
             .content h4,
             .content h5,
             .content h6 {
-                color: var(--text-heading);
+                color: var(--text-heading) !important;
                 transition: color 0.3s ease;
+            }
+
+            .content h2 {
+                padding-top: 1.5rem;
             }
 
             /* Override Bulma's .title class */
@@ -348,6 +352,30 @@
             .dv-right > *:first-child { margin-top: 0; }
             .dv-left > *:last-child,
             .dv-right > *:last-child { margin-bottom: 0; }
+
+            /* Page break separator */
+            .page-break {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                margin: 2.5rem 0 1.5rem;
+            }
+            .page-break::before,
+            .page-break::after {
+                content: '';
+                flex: 1;
+                height: 1px;
+                background: var(--accent-primary);
+                opacity: 0.5;
+            }
+            .page-break-label {
+                color: var(--accent-primary);
+                font-size: 0.8rem;
+                font-weight: 600;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                white-space: nowrap;
+            }
         </style>
     </head>
 

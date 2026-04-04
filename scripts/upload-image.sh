@@ -40,7 +40,7 @@ esac
 TODAY=$(date -u '+%Y-%m-%d')
 
 # Derive stable key from file content hash (matching upload worker scheme)
-HASH=$(shasum -a 256 "$INPUT" | cut -c1-16)
+HASH=$( (sha256sum "$INPUT" 2>/dev/null || shasum -a 256 "$INPUT") | cut -c1-16)
 IMAGE_KEY="uploads/${HASH}.${EXT_LOWER}"
 
 TMPDIR_WORK=$(mktemp -d)

@@ -308,3 +308,12 @@ Seeing this I wish I had gotten some more pictures of the house, but it always f
        width="800" height="600" loading="lazy" />
 </a>
 
+### Exotic Tours by J-Dog
+Because of my captivating tour guide narration skills (in the Wynn's first full video) and how exciting my outings can be, Jason Wynn made this badge for me.
+
+Cool story about this: this is Jason's first full use of AI in their videos. In part inspired by me and especially appropriate for me (I talked about AI a fair bit on the trip but I made sure to only do it when asked, I promise!)
+
+<a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/0e62026fb2631253.jpg" target="_blank">
+  <img alt="exotic_tours_by_jdog" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto,dpr=2/uploads/0e62026fb2631253.jpg"
+       width="800" height="470" loading="lazy" />
+</a>
