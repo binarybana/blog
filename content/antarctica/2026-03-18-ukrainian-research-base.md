@@ -244,15 +244,28 @@ It may look like a horror game, but it was wonderful!
        width="800" height="600" loading="lazy" />
 </a>
 
+### Making Dumplings: a good post-sauna activity
+
+
+<a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/05528dc9be45e976.heic" target="_blank">
+  <img alt="Dumplings and misc 2" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto,dpr=2/uploads/05528dc9be45e976.heic"
+       width="800" height="1120" loading="lazy" />
+</a>
+
+<a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/f19de36b005b317d.jpg" target="_blank">
+  <img alt="Dumplings and misc 2" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto,dpr=2/uploads/f19de36b005b317d.jpg"
+       width="800" height="450" loading="lazy" />
+</a>
+
 ### Icebird hog-tied?
-Here's how they tied Icebird up for the two nights we were here. There are two ropes in the stern (like a normal stern tie) and then two more (actually three for safety/redundancy) in the bow. All of them go up and around rocks.
+Here's how they tied Icebird up for the two nights we were here. There are two ropes in the stern (like a normal stern tie) and then two more (actually three for safety/redundancy) in the bow. All of them go up and around rocks. I guess hog tying is where you tie the legs of a hog together, so maybe not the best description of this maneuver, but I don't know what else to call it.
 
 Kudos to Doug for doing a lot of scrambling on the rocks to get us tied up here though it was a team effort. I think at the time Chef had me in the bottom of a hold digging out some vegetables for dinner. This sounds like a simple procedure, but oh dear reader it was not. So many lines, boxes, crates, fenders and bag after bag of trash. All kept refrigerated by the Antarctic weather (thankfully) but still took a small team of us to manage.
 
 Bananas acquired! Onions acquired!
 
 <a href="https://blob.bask.day/cdn-cgi/image/format=auto/uploads/454a60999e9d0116.jpg" target="_blank">
-  <img alt="Ukraine 2" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto,dpr=2/uploads/454a60999e9d0116.jpg"
+  <img alt="Ukraine 2" src="https://blob.bask.day/cdn-cgi/image/width=800,format=auto,dpr=2,trim=400;0;0;0/uploads/454a60999e9d0116.jpg"
        width="800" height="600" loading="lazy" />
 </a>
 
