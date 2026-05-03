@@ -8,7 +8,11 @@
       "WebSearch",
       "WebFetch(domain:developers.cloudflare.com)",
       "Bash(ffprobe -v quiet -print_format json -show_streams ~/Pictures/ant-vids/IMG_6505.mp4)",
-      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(s.get\\('codec_type'\\), s.get\\('codec_name'\\), 'color_space:', s.get\\('color_space'\\), 'color_transfer:', s.get\\('color_transfer'\\), 'color_primaries:', s.get\\('color_primaries'\\)\\) for s in d['streams']]\")"
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(s.get\\('codec_type'\\), s.get\\('codec_name'\\), 'color_space:', s.get\\('color_space'\\), 'color_transfer:', s.get\\('color_transfer'\\), 'color_primaries:', s.get\\('color_primaries'\\)\\) for s in d['streams']]\")",
+      "Bash(npm ls *)",
+      "Bash(npm show *)",
+      "Bash(npm update *)",
+      "Bash(node -e \"const l=require\\('./package-lock.json'\\); const w=l.packages['node_modules/wrangler']; console.log\\('wrangler locked:', w?.version\\)\")"
     ]
   }
 }
